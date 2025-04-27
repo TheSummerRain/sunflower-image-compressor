@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunflower 图片压缩小工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <h1> ✨  Sunflower 图片压缩小工具 ✨ </h1>
+  </div>
+  
+  <div class="container">
+    <div class="left-panel">
+      <div class="card">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          上传图片
+        </div>
+        <div class="drop-area" id="dropArea">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <p>拖放图片到这里（支持批量图片），或者</p>
+          <button class="browse-btn" id="browseBtn">选择文件</button>
+          <input type="file" id="fileInput" style="display: none;" multiple accept="image/*">
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          压缩设置
+        </div>
+        
+        <div class="settings-group">
+          <label for="format">输出格式</label>
+          <select id="format">
+            <option value="original">保持原格式</option>
+            <option value="jpg">JPG</option>
+            <option value="png">PNG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+        
+
+        
+        <div class="settings-group">
+          <div class="api-key-container">
+            <label for="apiKey">TinyPNG API密钥</label>
+            <div class="usage-count" id="usageCountDisplay">本月已使用: <span>0</span>/500 次</div>
+          </div>
+          <input type="text" id="apiKey" class="api-key-input" placeholder="请输入您的API密钥">
+          <div class="settings-info">
+            您需要一个TinyPNG API密钥才能使用此功能。官方给每个账号，每月500次免费额度，每月重置，若不够用请多申请几个账号。
+            <a href="https://tinypng.com/developers" target="_blank">点击此处申请免费API密钥</a>
+          </div>
+        </div>
+        
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="outputDirBtn">① 选择输出目录</button>
+          <button class="btn btn-primary" id="compressBtn">② 开始压缩</button>
+        </div>
+        <div class="btn-group" style="margin-top: 10px;">
+          <button class="btn btn-secondary" id="openOutputDirBtn" disabled>③ 打开输出文件夹</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="right-panel">
+      <div class="card" style="flex: 1; min-height:400px; display:flex; flex-direction:column;">
+        <div class="card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          压缩预览
+        </div>
+        
+        <div id="previewContainer" class="preview-container">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p>暂无图片预览</p>
+            <p>请先上传图片</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="status-bar">
+    <div class="status">
+      <div class="dot"></div>
+      <span>就绪</span>
+    </div>
+    <div class="info">拖放图片或点击选择文件按钮开始</div>
+    <div class="developer-info">
+      <span> @红雪</span>
+      <a href="#" target="_blank" class="coffee-btn">Buy Me a Coffee</a>
+    </div>
+  </div>
+
+  <!-- 引入JavaScript文件 -->
+  <script src="renderer.js"></script>
+  <script src="app.js"></script>
+  
+  <!-- 收款二维码弹窗 -->
+  <div id="coffeeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Buy Me a Coffee 🌻 </h2>
+      <div class="qr-codes">
+        <div class="qr-code">
+          <img src="assets/weixinzhifu.png" alt="微信收款码">
+        </div>
+        <div class="qr-code">
+          <img src="assets/zhifubao.png" alt="支付宝收款码">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

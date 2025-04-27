@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <title>sunflower 图片压缩小工具图标</title>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6a11cb" />
+      <stop offset="100%" stop-color="#2575fc" />
+    </linearGradient>
+  </defs>
+  <rect x="48" y="48" width="416" height="416" rx="48" fill="url(#gradient)" />
+  <path d="M144 144 L368 144 L368 368 L144 368 Z" stroke="white" stroke-width="24" stroke-linejoin="round" />
+  <circle cx="208" cy="208" r="32" fill="white" />
+  <path d="M144 368 L240 272 L368 368" stroke="white" stroke-width="24" stroke-linejoin="round" />
+  <path d="M272 208 L368 304 L368 208" stroke="white" stroke-width="24" stroke-linejoin="round" />
+</svg>
