@@ -38,3 +38,6 @@ out/
 
 # App specific
 app-config.json
+
+# 说明文档
+项目说明文档.md
