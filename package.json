@@ -10,6 +10,9 @@
     "build:mac": "electron-builder --mac",
     "build:win": "electron-builder --win"
   },
+  "electronDownload": {
+    "mirror": "https://npmmirror.com/mirrors/electron/"
+  },
   "author": "红雪",
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +34,10 @@
       "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
       "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
     ],
+    "electronDist": "https://npmmirror.com/mirrors/electron-builder-binaries/",
+    "electronDownload": {
+      "mirror": "https://npmmirror.com/mirrors/electron/"
+    },
     "mac": {
       "category": "public.app-category.utilities",
       "icon": "assets/xiangrikui1.icns",
