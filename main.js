@@ -29,7 +29,7 @@ function createWindow() {
   });
 
   // 打开开发者工具
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // 当窗口关闭时触发
   mainWindow.on('closed', function () {
