@@ -513,3 +513,11 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('a');
+  if (target && target.getAttribute('href') && target.getAttribute('target') === '_blank') {
+    e.preventDefault();
+    ipcRenderer.invoke('open-external-link', target.getAttribute('href'));
+  }
+});

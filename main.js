@@ -100,3 +100,11 @@ ipcMain.handle('open-directory', async (event, dirPath) => {
   }
   return false;
 });
+
+ipcMain.handle('open-external-link', async (event, url) => {
+  if (url) {
+    await shell.openExternal(url);
+    return true;
+  }
+  return false;
+});
